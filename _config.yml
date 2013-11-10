@@ -1,6 +1,7 @@
 # Dependencies
 markdown:         rdiscount
 pygments:         true
+timezone: 		  Europe/London
 
 # Permalinks
 permalink:        pretty
