@@ -75,7 +75,7 @@ title: TrendSeam API
 		
 		<div class="row docs-segment docs-title" id="auth">
 			<div class="col-md-6">
-				<h3>Authorisation</h3>
+				<h3>Authentication</h3>
 			</div>
 		</div>
 		<div class="row docs-segment">
@@ -195,32 +195,32 @@ $headers = [
 			</div>
 		</div>
 		
-		<div class="row docs-segment docs-title" id="errors">
-			<div class="col-md-6">
-				<h3>Errors</h3>
-			</div>
-		</div>
-		<div class="row docs-segment">
-			<div class="col-md-6">
+		<!-- 		<div class="row docs-segment docs-title" id="errors">
+					<div class="col-md-6">
+						<h3>Errors</h3>
+					</div>
+				</div>
+				<div class="row docs-segment">
+					<div class="col-md-6">
+						
+						<h5>Gogoe</h5>
+					
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					
 				
-				<h5>Gogoe</h5>
+					</div>
 			
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			
-		
-			</div>
-	
-			<div class="col-md-6">
-		
-					<h5>Example Request</h5>
-			
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			
-		
-			</div>
-		</div>
-		
+					<div class="col-md-6">
+				
+							<h5>Example Request</h5>
+					
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					
+				
+					</div>
+				</div>
+				 -->
 		
 			
 		<div class="row docs-segment docs-title" id="order">
@@ -231,18 +231,122 @@ $headers = [
 		<div class="row docs-segment">
 			<div class="col-md-6">
 			
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<h5>Definition</h5>
 			
+					<p>A Order is a single transaction made by a <a href="#customer">Customer</a>.</p>
+					<p>It may comprise of Customer, Address and Product data.</p>
+					
+				<h5>Method Endpoint</h5>
+					
+					<p>To upload orders you should <code>POST</code> an Array of JSON-formatted data to this URL:</p>
+					
+					<div class="well">
+						
+						https://api.trendseam.com/api/v1/order
+						
+					</div>
+					
+				<h5>Data Format</h5>
+					
+					<p>Each Order should be represented as an Object in the array, and should be defined as such:</p>
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>OrderNumber</code></td>
+								<td>Unique ID of this order<br>[required]</td>
+							</tr>
+								<td><code>OrderDate</code></td>
+								<td>Date order was created<br>Format: YYYY-MM-DD HH:MM:SS</td>
+							</tr>
+							<tr>
+								<td><code>SubTotal</code></td>
+								<td>Total gross amount<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>DeliveryCost</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>DeliveryTax</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>GrandTotal</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>Currency</code></td>
+								<td>Expressed as <a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency codes</td>
+							</tr>
+							<tr>
+								<td><code>Cashier</code></td>
+								<td>Name of cashier (if physical transaction)</td>
+							</tr>
+							<tr>
+								<td><code>SalesAssistant</code></td>
+								<td>Name of sales assistant (if physical transaction)</td>
+							</tr>
+							<tr>
+								<td><code>SalesChannel</code></td>
+								<td>Type of sale e.g. Online Store, or Retail Outlet #TODO should indicate store location too e.g. liverpool???</td>
+							</tr>
+							<tr>
+								<td><code>BillingAddress</code></td>
+								<td>A billing <a href="#address">Address</a> Object</td>
+							</tr>
+							<tr>
+								<td><code>ShippingAddress</code></td>
+								<td>A shipping <a href="#address">Address</a> Object</td>
+							</tr>
+							<tr>
+								<td><code>Customer</code></td>
+								<td>The associated <a href="#customer">Customer</a> Object</td>
+							</tr>
+							<tr>
+								<td><code>OrderItems</code></td>
+								<td>The associated Array of <a href="#product">Products</a></td>
+							</tr>
+						</tbody>
+					</table>
+	
 		
 			</div>
 	
 			<div class="col-md-6">
 		
-					<h5>Example Request</h5>
+					<h5>Example JSON Order Object</h5>
 			
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-			
+<pre><code>{
+  'OrderNumber': 'RS001234',
+  'OrderDate': '2013-02-12 15:12:04',
+  'SubTotal': '326.00',
+  'DeliveryCost': '20.00',
+  'DeliveryTax': '4.00',
+  'GrandTotal': '350.00',
+  'Currency': 'gbp',
+  'Cashier': 'Jenny H',
+  'SalesAssistant': 'Jenny H',
+  'SalesChannel': 'Retail Store',
+  'BillingAddress': {
+	<a href="#address">...</a>
+  },
+  'ShippingAddress': {
+	<a href="#address">...</a>
+  },
+  'Customer': {
+	<a href="#customer">...</a>
+  },
+  'OrderItems': [
+  	<a href="#order">...</a>
+  ]
+}</code></pre>
 		
 			</div>
 		</div>
@@ -439,11 +543,209 @@ $headers = [
 		<div class="row docs-segment">
 			<div class="col-md-6">
 				
-				<h5>Gogoe</h5>
+				<h5>Definition</h5>
 			
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-					<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<p>A customer must have a unique reference or identifying code. Each customer can have multiple <a href="#order">Orders</a>.</p>
+					
+					<h5>Method Endpoint</h5>
+					
+					<p>To upload customers you should <code>POST</code> an Array of JSON-formatted data to this URL:</p>
+					
+					<div class="well">
+						
+						https://api.trendseam.com/api/v1/customer
+						
+					</div>
+					
+					<h5>Data Format</h5>
+					
+					<p>Each Customer should be defined as such:</p>
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>RetailerReference</code></td>
+								<td>Retailer's unique identifying code for this customer<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>Title</code></td>
+								<td>Titular prefix e.g. Mrs, Dr or Miss</td>
+							</tr>
+							<tr>
+								<td><code>FirstName</code></td>
+								<td>Customer first name</td>
+							</tr>
+							<tr>
+								<td><code>MiddleName</code></td>
+								<td>Customer middle names if any</td>
+							</tr>
+							<tr>
+								<td><code>LastName</code></td>
+								<td>Customer last/family name</td>
+							</tr>
+							<tr>
+								<td><code>Address</code></td>
+								<td>Customer's <a href="#address">Address</a> object</td>
+							</tr>
+							<tr>
+								<td><code>Email</code></td>
+								<td>Customer email address</td>
+							</tr>
+							<tr>
+								<td><code>MobilePhone</code></td>
+								<td>Customer mobile phone</td>
+							</tr>
+							<tr>
+								<td><code>HomePhone</code></td>
+								<td>Customer home phone</td>
+							</tr>
+							<tr>
+								<td><code>WorkPhone</code></td>
+								<td>Customer work phone</td>
+							</tr>
+							<tr>
+								<td><code>OtherPhone</code></td>
+								<td>Customer other phone</td>
+							</tr>
+							<tr>
+								<td><code>DateCreated</code></td>
+								<td>Date customer first created<br>Format: YYYY-MM-DD HH:MM:SS</td>
+							</tr>
+							<tr>
+								<td><code>DateOfBirth</code></td>
+								<td>Date of birth<br>Format: #TODO</td>
+							</tr>
+							<tr>
+								<td><code>Gender</code></td>
+								<td>#TODO</td>
+							</tr>
+						</tbody>
+					</table>
+		
+					<!-- 
+						
+								
+		$o->Customer->RetailerReference = $customer_id;
+		$o->Customer->Title = null; // From shipping or payment?
+		$o->Customer->FirstName = $customer_first_name;
+		$o->Customer->MiddleName = null; // No mappable value
+		$o->Customer->LastName = $customer_last_name;
+		$o->Customer->Address = new \stdClass;
+		$o->Customer->Email = $customer_email;
+		$o->Customer->MobilePhone = null; // No mappable value
+		$o->Customer->HomePhone = null; // No mappable value
+		$o->Customer->WorkPhone = null; // No mappable value
+		$o->Customer->OtherPhone = null; // No mappable value 
+		$o->Customer->DateCreated = $customer_created_at;
+		$o->Customer->DateOfBirth = null; // No mappable value
+		$o->Customer->Gender = null; // No mappable value
+						
+						 -->
 			
+		
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example JSON Customer Object</h5>
+			
+<pre><code>{
+  'RetailerReference': '0012345',
+  'Title': 'Mr',
+  'FirstName': 'John',
+  'MiddleName': 'Mark',
+  'LastName': 'Doe',
+  'Address': {
+	'Line1' : 'Brockhampton Business Park',
+	'City' : 'Near Hereford',
+	'County' : 'Herefordshire',
+  	<a href="#address">...</a>
+  },
+  'MobilePhone': '07771 123 123',
+  'HomePhone': '0123 123 124',
+  'WorkPhone': '0123 123 123',
+  'DateCreated': '2013-01-02 14:12:00',
+  'DateOfBirth': '#TODO',
+  'Gender': '#TODO'
+}</code></pre>
+		
+			</div>
+		</div>
+		
+		<div class="row docs-segment docs-title" id="address">
+			<div class="col-md-6">
+				<h3>Address</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+			
+				<h5>Definition</h5>
+			
+					<p>An Address is a structure attached to either an <a href="#order">Order</a> or a <a href="#customer">Customer</a> as a Billing Address or Shipping Address.</p>
+					<p>Addresses do not have their own endpoint, and should be sent to the API as an Object inside a Order or Customer Object.</p>
+					
+					<h5>Data Format</h5>
+					
+					<p>Each Address should be represented as such:</p>
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>Line1</code></td>
+								<td>First line of the address</td>
+							</tr>
+							<tr>
+								<td><code>Line2</code></td>
+								<td>Second line of the address</td>
+							</tr>
+							<tr>
+								<td><code>Line3</code></td>
+								<td>Third line of the address</td>
+							</tr>
+							<tr>
+								<td><code>City</code></td>
+								<td>Name of the city</td>
+							</tr>
+							<tr>
+								<td><code>County</code></td>
+								<td>Name of the county or state</td>
+							</tr>
+							<tr>
+								<td><code>Postcode</code></td>
+								<td>Postal code</td>
+							</tr>
+							<tr>
+								<td><code>CountryCode</code></td>
+								<td>Two-letter <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 code</a> for the country</p></td>
+							</tr>
+							<tr>
+								<td><code>Phone</code></td>
+								<td>Phone number for this address</td>
+							</tr>
+							<tr>
+								<td><code>PhoneNumber</code></td>
+								<td>Phone number for this address #TODO duplicate see above???</td>
+							</tr>
+							<tr>
+								<td><code>CompanyName</code></td>
+								<td>Company name if applicable</td>
+							</tr>
+						</tbody>
+					</table>
 		
 			</div>
 	
@@ -451,11 +753,23 @@ $headers = [
 		
 					<h5>Example Request</h5>
 			
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<pre><code>{			
+  'Line1' : 'Great Barn',
+  'Line2 : 'Brockhampton Business Park',
+  'Line3 : 'Brockhampton',
+  'City : 'Near Hereford',
+  'County : 'Herefordshire',
+  'Postcode : 'HR1 4PP',
+  'CountryCode : 'gb',
+  'Phone : '01234 123 123',
+  'PhoneNumber : '01234 123 123',
+  'CompanyName : 'TrendSeam'
+}</code></pre>
 			
 		
 			</div>
 		</div>
-
+		
+		
 </div>
 
