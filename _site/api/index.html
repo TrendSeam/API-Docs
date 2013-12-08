@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.png">
+
+    <title>TrendSeam API</title>
+
+    <link href="//bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+    <link href="//assets/css/docs.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	
+	 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">
+			<img src="/assets/img/logo.png" alt="TrendSeam API">
+			TrendSeam API Docs
+		  </a>
+        </div>
+		<ul class="nav navbar-nav navbar-right">
+	      <!-- <li class="active"><a href="#">Link</a></li> -->
+	      <li class="dropdown">
+	        <a href="/" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+	        <ul class="dropdown-menu">
+	          <li><a href="/api/methods">Methods</a></li>
+	          <li><a href="/api/errors">Errors</a></li>
+	          <li class="divider"></li>
+	          <li><a href="#">Something else here</a></li>
+	        </ul>
+	      </li>
+	    </ul>
+      </div>
+    </div>
+
+	<div class="container">
+	
+	  <div class="row">
+
+	<div class="col-md-2">
+	<div data-spy="affix" data-offset-top="0">
+	<ul class="nav nav-pills nav-stacked">
+	  <li><a href="#start">Get Started</a></li>
+	  <li><a href="#auth">Authentication</a></li>
+	  <!-- <li><a href="#errors">Errors</a></li> -->
+	  <li><a href="#order">Orders</a></li>
+	  <li><a href="#product">Products</a></li>
+	  <li><a href="#variant">Variants</a></li>
+	  <li><a href="#customer">Customers</a></li>
+	  <li><a href="#address">Addresses</a></li>
+	</ul>
+</div>
+	</div>
+
+	<div class="col-md-10">
+		
+		<div class="row docs-segment docs-title" id="start">
+			<div class="col-md-6">
+				<h3>Getting Started</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+				
+				<h5>First Principles</h5>
+			
+					<p>The TrendSeam API is based on RESTful principles, and allows you to transfer your product, order and customer data directly into the TrendSeam system, and then we will process that into extraordinary visual insights and reports you see in your dashboard and reports.</p>
+					
+					
+				<h5>The Data You Should Send</h5>
+					
+					<p>To get the most from TrendSeam, you should be regularly sending us three key streams of data. These are:</p>
+					<ul>
+						<li><a href="#product">Products</a> (and their <a href="#variant">Variants</a>)</li>
+						<li><a href="#order">Orders</a> (which will reference Products and Variants)</li>
+						<li><a href="#customer">Customers</a> (which will reference Orders)</li>
+					</ul>
+					<p>To use TrendSeam at the most basic level, you must at least provide <a href="#order">Order</a> data with the associated <a href="#customer">Customer</a> record.</p>
+			
+				<h5>Data Format</h5>
+				
+				<p>The API accepts JSON formatted data.</p>
+				
+				<p>The documentation on these pages demonstrates what data and how it should be formatted in order to successfully submit it into the TrendSeam API.</p>
+				
+				<p>We understand that there are many, many ways of representing sales data, and much of it comes in proprietary formats. It's possible that this API doesn't direct map to your own data yet, and chances are you will need to build some form of convertor in order to process it into a workable format.</p>
+			
+				<p>Our aim is to provide a level playing field, to which any retailer can submit their data, but if for whatever reason you can't immediately submit all your data in the exact format we need, this usually isn't a huge problem.</p>
+		
+				<p>For example, the way you process tax may make it hard to import it the way we ask, so you can omit that as long as you provide the other minimum level of key data (which are each indicated as 'required' in this documentation). With the most fundamental 'required' data sent, TrendSeam can make sense of the general dataset as a whole, but what you get oit of TrendSeam maybe a little limited until you can find a way to provide that additional data.</p>
+				
+				<h5 id="key">Your API Key</h5>
+				
+				<p>You will need a TrendSeam API Key to start communicating with us via the API. You can <a href="mailto:support@trendseam.com?subject=API%20Key%20Request">email us</a> to request one.</p>
+				
+				<p>Once you have your key, you will need to create a simple hash from it. View the <a href="#key-hash">instructions</a>.</p>
+				
+				<h5>Any Questions?</h5>
+		
+				<p>Just <a href="mailto:support@trendseam.com?subject=API">email us</a> and we'll be happy to help.</p>
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Code Samples</h5>
+					
+					<p>We will show sample code alongside each section of this documentation. Code will be shown in blocks as so:</p>
+			
+<pre>
+<code>{ 'key' : 'value' }</code>
+</pre>
+			
+		
+			</div>
+		</div>
+		
+		
+		<div class="row docs-segment docs-title" id="auth">
+			<div class="col-md-6">
+				<h3>Authentication</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+				
+				<h5>Connecting to the API</h5>
+				
+					<p>You can connect to the API using your TrendSeam <a href="#key">API Key</a>, submitted in each API call on the TrendSeam API Endpoint.</p>
+					
+					<p>The base API Endpoint URL is:</p>
+					
+					<div class="well">
+						
+						https://api.trendseam.com/api/v1/
+						
+					</div>
+					
+					<p>So for example, when you submit a list of Products, you will use our API's <a href="#product">Product</a> method &ndash; the URL logically created using a standard RESTful pattern &ndash; sending formatted JSON Product data using <code>POST</code> to the following URL:</p>
+					
+					<div class="well">
+						
+						https://api.trendseam.com/api/v1/product
+						
+					</div>
+					
+				<h5>Request Headers</h5>
+				
+					<p>You will need to submit a number of HTTP headers with every request.</p>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Header</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>Accept</code></td>
+								<td><code>application/json</code></td>
+							</tr>
+							<tr>
+								<td><code>Connection</code></td>
+								<td><code>keep-alive</code></td>
+							</tr>
+							<tr>
+								<td><code>Content-Type</code></td>
+								<td><code>application/json; charset=UTF-8</code></td>
+							</tr>
+							<tr>
+								<td><code>Authorization</code></td>
+								<td><code>Basic <a href="#key-hash">[Your API Key Hash  - see note]</a></code></td>
+							</tr>
+							<tr>
+								<td><code>Accept-Encoding</code></td>
+								<td><code>gzip,deflate,sdch</code></td>
+							</tr>
+							<tr>
+								<td><code>Accept-Language</code></td>
+								<td><code>en-GB,en-US</code></td>
+							</tr>
+							<tr>
+								<td><code>Accept-Charset</code></td>
+								<td><code>ISO-8859-1,utf-8</code></td>
+							</tr>
+						</tbody>
+					</table>
+					
+				
+					
+				<h5 id="key-hash">API Key Hash</h5>
+				
+					<p>Your TrendSeam API Key needs to be hashed before you add it into your Request Headers. Follow these steps to hash the key:</p>
+					<ol>
+						<li>Request a TrendSeam API key from us</li>
+						<li>Create a string by concatenating your API key, a colon and your API key again, as such  <code>YOURKEY:YOURKEY</code></li>
+						<li>Base64 encode the whole string</li>
+					</ol>
+					<p>Here is a worked example using the fictional API key:</p>
+					
+					<div class="well">
+						
+						<ol>
+							<li>Your key: <code>YyhsH7Dsh232a792dgS</code></li>
+							<li>Concatenated: <code>YyhsH7Dsh232a792dgS:YyhsH7Dsh232a792dgS</code></li>
+							<li>Base64 encoded: <code>WXloc0g3RHNoMjMyYTc5MmRnUzpZeWhzSDdEc2gyMzJhNzkyZGdT</code></li>
+						</ol>
+						
+					</div>
+					
+				<h5>All Set!</h5>
+				
+					<p>You should now be able to successfully connect to the server.</p>
+					<p>At this time we do not provide libraries for connecting, however if you are looking for ways of starting to use the API, you should consider tools such as cURL.</p>
+				
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example Request Headers (PHP)</h5>
+			
+<pre>
+<code>
+$headers = [
+ 'Accept: application/json, text/javascript, */*',
+ 'Connection: keep-alive',
+ 'Content-Type: application/json; charset=UTF-8',
+ 'Authorization: Basic WXloc0g3RHNoMjMyYTc5MmRnUzpZeWhzSDdEc2gyMzJhNzkyZGdT',
+ 'Accept-Encoding: gzip,deflate,sdch',
+ 'Accept-Language: en-GB,en-US',
+ 'Accept-Charset: ISO-8859-1,utf-8'
+];
+</code>
+</pre>
+			
+		
+			</div>
+		</div>
+		
+		<!-- 		<div class="row docs-segment docs-title" id="errors">
+					<div class="col-md-6">
+						<h3>Errors</h3>
+					</div>
+				</div>
+				<div class="row docs-segment">
+					<div class="col-md-6">
+						
+						<h5>Gogoe</h5>
+					
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+							<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					
+				
+					</div>
+			
+					<div class="col-md-6">
+				
+							<h5>Example Request</h5>
+					
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					
+				
+					</div>
+				</div>
+				 -->
+		
+			
+		<div class="row docs-segment docs-title" id="order">
+			<div class="col-md-6">
+				<h3>Order</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+			
+				<h5>Definition</h5>
+			
+					<p>A Order is a single transaction made by a <a href="#customer">Customer</a>.</p>
+					<p>It may comprise of Customer, Address and Product data.</p>
+					
+				<h5>Method Endpoint</h5>
+					
+					<p>To upload orders you should <code>POST</code> an Array of JSON-formatted data to this URL:</p>
+					
+					<div class="well">
+						
+						https://api.trendseam.com/api/v1/order
+						
+					</div>
+					
+				<h5>Data Format</h5>
+					
+					<p>Each Order should be represented as an Object in the array, and should be defined as such:</p>
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>OrderNumber</code></td>
+								<td>Unique ID of this order<br>[required]</td>
+							</tr>
+								<td><code>OrderDate</code></td>
+								<td>Date order was created<br>Format: YYYY-MM-DD HH:MM:SS</td>
+							</tr>
+							<tr>
+								<td><code>SubTotal</code></td>
+								<td>Total gross amount<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>DeliveryCost</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>DeliveryTax</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>GrandTotal</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>Currency</code></td>
+								<td>Expressed as <a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency codes</td>
+							</tr>
+							<tr>
+								<td><code>Cashier</code></td>
+								<td>Name of cashier (if physical transaction)</td>
+							</tr>
+							<tr>
+								<td><code>SalesAssistant</code></td>
+								<td>Name of sales assistant (if physical transaction)</td>
+							</tr>
+							<tr>
+								<td><code>SalesChannel</code></td>
+								<td>Type of sale e.g. Online Store, or Retail Outlet #TODO should indicate store location too e.g. liverpool???</td>
+							</tr>
+							<tr>
+								<td><code>BillingAddress</code></td>
+								<td>A billing <a href="#address">Address</a> Object</td>
+							</tr>
+							<tr>
+								<td><code>ShippingAddress</code></td>
+								<td>A shipping <a href="#address">Address</a> Object</td>
+							</tr>
+							<tr>
+								<td><code>Customer</code></td>
+								<td>The associated <a href="#customer">Customer</a> Object</td>
+							</tr>
+							<tr>
+								<td><code>OrderItems</code></td>
+								<td>The associated Array of <a href="#product">Products</a></td>
+							</tr>
+						</tbody>
+					</table>
+	
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example JSON Order Object</h5>
+			
+<pre><code>{
+  'OrderNumber': 'RS001234',
+  'OrderDate': '2013-02-12 15:12:04',
+  'SubTotal': '326.00',
+  'DeliveryCost': '20.00',
+  'DeliveryTax': '4.00',
+  'GrandTotal': '350.00',
+  'Currency': 'gbp',
+  'Cashier': 'Jenny H',
+  'SalesAssistant': 'Jenny H',
+  'SalesChannel': 'Retail Store',
+  'BillingAddress': {
+	<a href="#address">...</a>
+  },
+  'ShippingAddress': {
+	<a href="#address">...</a>
+  },
+  'Customer': {
+	<a href="#customer">...</a>
+  },
+  'OrderItems': [
+  	<a href="#order">...</a>
+  ]
+}</code></pre>
+		
+			</div>
+		</div>
+	
+		
+		<div class="row docs-segment docs-title" id="product">
+			<div class="col-md-6">
+				<h3>Product</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+				
+					<h5>Definition</h5>
+			
+					<p>A product is a single line of stock such as a scarf, or a coat.</p>
+					<p>It may or may not have <a href="#variant">Variants</a> (e.g. red, blue or small, medium, large). A product must have a unique SKU or identifying code. <a href="#variant">Variants</a> must have their own unique identifying codes.</p>
+					
+					<h5>Method Endpoint</h5>
+					
+					<p>To upload products you should <code>POST</code> an Array of JSON-formatted data to this URL:</p>
+					
+					<div class="well">
+						
+						https://api.trendseam.com/api/v1/product
+						
+					</div>
+					
+					<h5>Data Format</h5>
+					
+					<p>Each Product should be represented as an Object in the array, and should be defined as such:</p>
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>Name</code></td>
+								<td>Human readable title of product<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>Sku</code></td>
+								<td>Product SKU or unique ID<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>DateCreated</code></td>
+								<td>Date product was first created<br>Format: YYYY-MM-DD HH:MM:SS</td>
+							</tr>
+							<tr>
+								<td><code>Variants</code></td>
+								<td>Array of <a href="#variant">Variants</a></td>
+							</tr>
+						</tbody>
+					</table>
+			
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example JSON Products Array</h5>
+			
+<pre><code>[
+  {
+    'Name' : 'Double-Breasted Winter Peacoat',
+    'Sku' : 'AW13DBPGRY001',
+    'DateCreated' : '2013-02-03 14:12:02',
+    'Variants' :
+      [ ... ]
+  },
+  { ... }
+]</code></pre>
+			
+		
+			</div>
+		</div>
+		
+		<div class="row docs-segment docs-title" id="variant">
+			<div class="col-md-6">
+				<h3>Variant</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+				
+					<h5>Definition</h5>
+			
+					<p>A Variant is a sub-type of <a href="#product">Product</a>. A variant must be the child of a <a href="#product">Product</a>.</p>
+					<p>A Variant must have a unique SKU or identifying ID to be imported into TrendSeam.</a>.</p>
+					<p>Variants do not have their own endpoint as they are a sub-type of a <a href="#product">Product</a>, and therefore should be sent to the API within the Array inside a Product Object.</p>
+					
+					<h5>Data Format</h5>
+					
+					<p>Each Variant should be represented as an Object in the Product's Variants array, and should be defined as such:</p>
+			
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>Sku</code></td>
+								<td>Product SKU or unique ID (must be different to child Variant SKU)<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>ProductName</code></td>
+								<td>Human readable title of product #TODO ????<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>VariantName</code></td>
+								<td>Human readable title of product variant<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>VariantSku</code></td>
+								<td>Variant SKU or unique ID (must be different to parent Product SKU)<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>Barcode</code></td>
+								<td>Barcode value (string)</td>
+							</tr>
+							<tr>
+								<td><code>ItemPrice</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>ItemTax</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>VariantCreatedOn</code></td>
+								<td>Date variant was first created<br>Format: YYYY-MM-DD HH:MM:SS</td>
+							</tr>
+						</tbody>
+						<tbody>
+							<!-- #TODO only when a sale? -->
+							<tr>
+								<td><code>LineTotal</code></td>
+								<td>#TODO</td>
+							</tr>
+							<tr>
+								<td><code>CostEach</code></td>
+								<td>Retail cost per item (string) ?????</td>
+							</tr>
+							<tr>
+								<td><code>Quantity</code></td>
+								<td>Number of this variant stocked ?????</td>
+							</tr>
+						</tbody>
+					</table>
+			
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example JSON Variants Array (inside a Product Object)</h5>
+			
+<pre><code>[
+  {
+    'Sku': '',
+    'ProductName': '',
+    'VariantName': '',
+    'VariantSku': '',
+    'Barcode': '',
+    'ItemPrice': '',
+    'ItemTax': '',
+    'VariantCreatedOn': '',
+    'LineTotal': '',
+    'CostEach': '',
+    'Quantity': '',
+  },
+  { ... }
+]</code></pre>
+			
+		
+			</div>
+		</div>
+		
+	
+	
+		<div class="row docs-segment docs-title" id="customer">
+			<div class="col-md-6">
+				<h3>Customer</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+				
+				<h5>Definition</h5>
+			
+					<p>A customer must have a unique reference or identifying code. Each customer can have multiple <a href="#order">Orders</a>.</p>
+					
+					<h5>Method Endpoint</h5>
+					
+					<p>To upload customers you should <code>POST</code> an Array of JSON-formatted data to this URL:</p>
+					
+					<div class="well">
+						
+						https://api.trendseam.com/api/v1/customer
+						
+					</div>
+					
+					<h5>Data Format</h5>
+					
+					<p>Each Customer should be defined as such:</p>
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>RetailerReference</code></td>
+								<td>Retailer's unique identifying code for this customer<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>Title</code></td>
+								<td>Titular prefix e.g. Mrs, Dr or Miss</td>
+							</tr>
+							<tr>
+								<td><code>FirstName</code></td>
+								<td>Customer first name</td>
+							</tr>
+							<tr>
+								<td><code>MiddleName</code></td>
+								<td>Customer middle names if any</td>
+							</tr>
+							<tr>
+								<td><code>LastName</code></td>
+								<td>Customer last/family name</td>
+							</tr>
+							<tr>
+								<td><code>Address</code></td>
+								<td>Customer's <a href="#address">Address</a> object</td>
+							</tr>
+							<tr>
+								<td><code>Email</code></td>
+								<td>Customer email address</td>
+							</tr>
+							<tr>
+								<td><code>MobilePhone</code></td>
+								<td>Customer mobile phone</td>
+							</tr>
+							<tr>
+								<td><code>HomePhone</code></td>
+								<td>Customer home phone</td>
+							</tr>
+							<tr>
+								<td><code>WorkPhone</code></td>
+								<td>Customer work phone</td>
+							</tr>
+							<tr>
+								<td><code>OtherPhone</code></td>
+								<td>Customer other phone</td>
+							</tr>
+							<tr>
+								<td><code>DateCreated</code></td>
+								<td>Date customer first created<br>Format: YYYY-MM-DD HH:MM:SS</td>
+							</tr>
+							<tr>
+								<td><code>DateOfBirth</code></td>
+								<td>Date of birth<br>Format: #TODO</td>
+							</tr>
+							<tr>
+								<td><code>Gender</code></td>
+								<td>#TODO</td>
+							</tr>
+						</tbody>
+					</table>
+		
+					<!-- 
+						
+								
+		$o->Customer->RetailerReference = $customer_id;
+		$o->Customer->Title = null; // From shipping or payment?
+		$o->Customer->FirstName = $customer_first_name;
+		$o->Customer->MiddleName = null; // No mappable value
+		$o->Customer->LastName = $customer_last_name;
+		$o->Customer->Address = new \stdClass;
+		$o->Customer->Email = $customer_email;
+		$o->Customer->MobilePhone = null; // No mappable value
+		$o->Customer->HomePhone = null; // No mappable value
+		$o->Customer->WorkPhone = null; // No mappable value
+		$o->Customer->OtherPhone = null; // No mappable value 
+		$o->Customer->DateCreated = $customer_created_at;
+		$o->Customer->DateOfBirth = null; // No mappable value
+		$o->Customer->Gender = null; // No mappable value
+						
+						 -->
+			
+		
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example JSON Customer Object</h5>
+			
+<pre><code>{
+  'RetailerReference': '0012345',
+  'Title': 'Mr',
+  'FirstName': 'John',
+  'MiddleName': 'Mark',
+  'LastName': 'Doe',
+  'Address': {
+	'Line1' : 'Brockhampton Business Park',
+	'City' : 'Near Hereford',
+	'County' : 'Herefordshire',
+  	<a href="#address">...</a>
+  },
+  'MobilePhone': '07771 123 123',
+  'HomePhone': '0123 123 124',
+  'WorkPhone': '0123 123 123',
+  'DateCreated': '2013-01-02 14:12:00',
+  'DateOfBirth': '#TODO',
+  'Gender': '#TODO'
+}</code></pre>
+		
+			</div>
+		</div>
+		
+		<div class="row docs-segment docs-title" id="address">
+			<div class="col-md-6">
+				<h3>Address</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+			
+				<h5>Definition</h5>
+			
+					<p>An Address is a structure attached to either an <a href="#order">Order</a> or a <a href="#customer">Customer</a> as a Billing Address or Shipping Address.</p>
+					<p>Addresses do not have their own endpoint, and should be sent to the API as an Object inside a Order or Customer Object.</p>
+					
+					<h5>Data Format</h5>
+					
+					<p>Each Address should be represented as such:</p>
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>Line1</code></td>
+								<td>First line of the address</td>
+							</tr>
+							<tr>
+								<td><code>Line2</code></td>
+								<td>Second line of the address</td>
+							</tr>
+							<tr>
+								<td><code>Line3</code></td>
+								<td>Third line of the address</td>
+							</tr>
+							<tr>
+								<td><code>City</code></td>
+								<td>Name of the city</td>
+							</tr>
+							<tr>
+								<td><code>County</code></td>
+								<td>Name of the county or state</td>
+							</tr>
+							<tr>
+								<td><code>Postcode</code></td>
+								<td>Postal code</td>
+							</tr>
+							<tr>
+								<td><code>CountryCode</code></td>
+								<td>Two-letter <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1 code</a> for the country</p></td>
+							</tr>
+							<tr>
+								<td><code>Phone</code></td>
+								<td>Phone number for this address</td>
+							</tr>
+							<tr>
+								<td><code>PhoneNumber</code></td>
+								<td>Phone number for this address #TODO duplicate see above???</td>
+							</tr>
+							<tr>
+								<td><code>CompanyName</code></td>
+								<td>Company name if applicable</td>
+							</tr>
+						</tbody>
+					</table>
+		
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example Request</h5>
+			
+<pre><code>{			
+  'Line1' : 'Great Barn',
+  'Line2 : 'Brockhampton Business Park',
+  'Line3 : 'Brockhampton',
+  'City : 'Near Hereford',
+  'County : 'Herefordshire',
+  'Postcode : 'HR1 4PP',
+  'CountryCode : 'gb',
+  'Phone : '01234 123 123',
+  'PhoneNumber : '01234 123 123',
+  'CompanyName : 'TrendSeam'
+}</code></pre>
+			
+		
+			</div>
+		</div>
+		
+		
+</div>
+
+
+	
+      <hr>
+
+      <footer>
+        <p>&copy; TrendSeam 2013</p>
+      </footer>
+
+
+    </div> <!-- /container -->
+
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <script src="//bootstrap/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

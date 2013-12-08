@@ -13,3 +13,7 @@ port:             9001
 
 # Custom vars
 current_version:  1.0.0
+
+# Github
+baseurl:          /API-Docs
+url:              http://trendseam.github.io
