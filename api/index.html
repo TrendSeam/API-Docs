@@ -29,7 +29,7 @@ title: TrendSeam API
 					<p>To get the most from TrendSeam, you should be regularly sending us three key streams of data. These are:</p>
 					<ul>
 						<li><a href="#product">Products</a> (and their <a href="#variant">Variants</a>)</li>
-						<li><a href="#order">Orders</a> (which will reference Products and Variants)</li>
+						<li><a href="#order">Orders</a> (and their <a href="#order-product">Order Product</a>)</li>
 						<li><a href="#customer">Customers</a> (which will reference Orders)</li>
 					</ul>
 					<p>To use TrendSeam at the most basic level, you must at least provide <a href="#order">Order</a> data with the associated <a href="#customer">Customer</a> record.</p>
@@ -344,9 +344,110 @@ $headers = [
 	<a href="#customer">...</a>
   },
   'OrderItems': [
-  	<a href="#order">...</a>
+  	<a href="#order-item">...</a>
   ]
 }</code></pre>
+		
+			</div>
+		</div>
+
+		
+		<div class="row docs-segment docs-title" id="order-item">
+			<div class="col-md-6">
+				<h3>Order Item</h3>
+			</div>
+		</div>
+		<div class="row docs-segment">
+			<div class="col-md-6">
+				
+					<h5>Definition</h5>
+			
+					<p>An Order Item is a lightweight version of a <a href="#product">Product</a> and a <a href="#variant">Variant</a> which allows you to send over the minimal amount of information possible.</p>
+					<p>An Order Product must have a unique SKU or identifying ID to be imported into TrendSeam, if TrendSeam does not recognise the identifier then it will create a new <a href="#product">Product</a> and <a href="#variant">Variant</a> automatically.</p>
+					<p>Order Items do not have their own endpoint as they are a sub-type of a <a href="#order">OrderItems</a>, and therefore should be sent to the API within the Array inside a Order Object.</p>
+					
+					<h5>Data Format</h5>
+					
+					<p>Each Order Item should be represented as an Object in the Order's Order Items array, and should be defined as such:</p>
+			
+					
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th scope="col">Property</th>
+								<th scope="col">Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><code>Sku</code></td>
+								<td>Product SKU or unique ID (must be different to child Variant SKU)<br>[required]</td>
+							</tr>
+							<tr>
+								<td><code>ProductName</code></td>
+								<td>Human readable title of product</td>
+							</tr>
+							<tr>
+								<td><code>VariantSku</code></td>
+								<td>Variant SKU or unique ID (must be different to parent Product SKU)</td>
+							</tr>
+							<tr>
+								<td><code>VariantName</code></td>
+								<td>Human readable title of product variant</td>
+							</tr>
+							<tr>
+								<td><code>Barcode</code></td>
+								<td>The item's Barcode (string)</td>
+							</tr>
+							<tr>
+								<td><code>VariantCreatedOn</code></td>
+								<td>Date item was first created. If this is not supplied, TrendSeam will use the first date/time the Sku/VariantSku is used.<br>Format: YYYY-MM-DD HH:MM:SS</td>
+							</tr>
+							<tr>
+								<td><code>Quantity</code></td>
+								<td>The number of items purchased</td>
+							</tr>
+							<tr>
+								<td><code>CostEach</code></td>
+								<td>The cost to the retailer to purchase the item (used to calculate sales margins)</td>
+							</tr>
+							<tr>
+								<td><code>ItemPrice</code></td>
+								<td>The amount paid by the customer for the item</td>
+							</tr>
+							<tr>
+								<td><code>ItemTax</code></td>
+								<td>The amount of tax paid by the customer for the item</td>
+							</tr>
+							<tr>
+								<td><code>LineTotal</code></td>
+								<td>The ItemPrice multipled by the Quantity (this should include any taxes)</td>
+							</tr>
+						</tbody>
+					</table>
+			</div>
+	
+			<div class="col-md-6">
+		
+					<h5>Example JSON Order Item Array (inside an Order Object)</h5>
+			
+<pre><code>[
+  {
+    'Name' : 'Double-Breasted Winter Peacoat',
+    'Sku' : 'AW13DBPGRY001',
+    'VariantSku': 'AW13DBPGRY001-RED',
+    'VariantName': 'Red',
+    'Barcode': '7501031311309',
+    'VariantCreatedOn' : '2013-02-03 14:12:02',
+    'Quantity': '10',
+    'CostEach': '5.00',
+    'ItemPrice': '10.00',
+    'ItemTax': '2.00',
+    'LineTotal': '120.00',
+  },
+  { ... }
+]</code></pre>
+			
 		
 			</div>
 		</div>
@@ -456,52 +557,42 @@ $headers = [
 						</thead>
 						<tbody>
 							<tr>
-								<td><code>Sku</code></td>
-								<td>Product SKU or unique ID (must be different to child Variant SKU)<br>[required]</td>
-							</tr>
-							<tr>
-								<td><code>ProductName</code></td>
-								<td>Human readable title of product #TODO ????<br>[required]</td>
-							</tr>
-							<tr>
-								<td><code>VariantName</code></td>
-								<td>Human readable title of product variant<br>[required]</td>
-							</tr>
-							<tr>
 								<td><code>VariantSku</code></td>
-								<td>Variant SKU or unique ID (must be different to parent Product SKU)<br>[required]</td>
+								<td>Variant SKU or unique ID (must be different to parent Product SKU)</td>
+							</tr>
+							<tr>
+								<td><code>Name</code></td>
+								<td>Human readable title of product variant</td>
+							</tr>
+							<tr>
+								<td><code>Description</code></td>
+								<td>A longer description of the variant</td>
 							</tr>
 							<tr>
 								<td><code>Barcode</code></td>
-								<td>Barcode value (string)</td>
+								<td>The item's Barcode (string)</td>
 							</tr>
 							<tr>
-								<td><code>ItemPrice</code></td>
-								<td>#TODO</td>
+								<td><code>DateCreated</code></td>
+								<td>Date item was first created. If this is not supplied, TrendSeam will use the first date/time the VariantSku is used.<br>Format: YYYY-MM-DD HH:MM:SS</td>
 							</tr>
 							<tr>
-								<td><code>ItemTax</code></td>
-								<td>#TODO</td>
+								<td><code>UnitCost</code></td>
+								<td>The cost to the retailer to purchase the item (used to calculate sales margins)</td>
 							</tr>
 							<tr>
-								<td><code>VariantCreatedOn</code></td>
-								<td>Date variant was first created<br>Format: YYYY-MM-DD HH:MM:SS</td>
-							</tr>
-						</tbody>
-						<tbody>
-							<!-- #TODO only when a sale? -->
-							<tr>
-								<td><code>LineTotal</code></td>
-								<td>#TODO</td>
+								<td><code>UnitPrice</code></td>
+								<td>The amount the customer would pay for the item</td>
 							</tr>
 							<tr>
-								<td><code>CostEach</code></td>
-								<td>Retail cost per item (string) ?????</td>
+								<td><code>UnitTax</code></td>
+								<td>The amount of tax customer would pay for the item</td>
 							</tr>
 							<tr>
-								<td><code>Quantity</code></td>
-								<td>Number of this variant stocked ?????</td>
+								<td><code>Properties</code></td>
+								<td>An array of Key/Value pairs which can contain any extra product attributes you would like to store e.g. colour or material</td>
 							</tr>
+
 						</tbody>
 					</table>
 			
@@ -514,17 +605,21 @@ $headers = [
 			
 <pre><code>[
   {
-    'Sku': '',
-    'ProductName': '',
-    'VariantName': '',
-    'VariantSku': '',
-    'Barcode': '',
-    'ItemPrice': '',
-    'ItemTax': '',
-    'VariantCreatedOn': '',
-    'LineTotal': '',
-    'CostEach': '',
-    'Quantity': '',
+        'VariantSku': 'AW13DBPGRY001-RED'
+        'Name': 'Red'
+        'Description': 'Lovely red version of our Double-Breasted Winter Peacoat'
+        'Size': 'Large'
+        'Barcode': '7501031311309'
+        'UnitCost': '5.00'
+        'UnitPrice': '10.00'
+        'UnitTax': '2.00'
+        'DateCreated': '2013-02-03 14:12:02'
+        'Properties': [
+        	['Colour','Red'],
+        	['Length','180cm'],
+        	['Material','Cotton'],
+        	...
+    	]
   },
   { ... }
 ]</code></pre>
