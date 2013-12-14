@@ -291,11 +291,11 @@ $headers = [
 							</tr>
 							<tr>
 								<td><code>Cashier</code></td>
-								<td>A Cashier is a particular location within a SalesChannel. If a physical store this could be a Till, Floor or Department allowing you to compare different department's performance.</td>
+								<td>A Cashier is a particular location within a SalesChannel. If a physical store this could be a Till, Floor or Department allowing you to compare different department's performance.<br/>For online transactions, you could use this to store the pament method.</td>
 							</tr>
 							<tr>
 								<td><code>SalesAssistant</code></td>
-								<td>SalesAssistant is another level of grouping within SalesChannel and allows you to compare performance. This could be the name of the assistant or another narrative of your chosing.</td>
+								<td>SalesAssistant is another level of grouping within SalesChannel and allows you to compare performance. This could be the name of the assistant or another narrative of your chosing.<br/>For online transactions, you could use this to store the source of the sale i.e. Google AdWords.</td>
 							</tr>
 							<tr>
 								<td><code>BillingAddress</code></td>
@@ -331,9 +331,9 @@ $headers = [
   'DeliveryTax': '4.00',
   'GrandTotal': '350.00',
   'Currency': 'gbp',
-  'Cashier': 'Jenny H',
-  'SalesAssistant': 'Jenny H',
-  'SalesChannel': 'Retail Store',
+  'SalesChannel': 'Website',
+  'Cashier': 'PayPal',
+  'SalesAssistant': 'Google AdWords',
   'BillingAddress': {
 	<a href="#address">...</a>
   },
