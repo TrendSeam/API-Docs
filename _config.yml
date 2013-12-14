@@ -15,5 +15,5 @@ port:             9001
 current_version:  1.0.0
 
 # Github
-baseurl:          /API-Docs
-url:              http://trendseam.github.io
+baseurl:          /
+url:              http://docs.trendseam.com
