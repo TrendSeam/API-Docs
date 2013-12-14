@@ -271,31 +271,31 @@ $headers = [
 							</tr>
 							<tr>
 								<td><code>DeliveryCost</code></td>
-								<td>#TODO</td>
+								<td>The total cost to the customer for any delivery -can include or exclude tax</td>
 							</tr>
 							<tr>
 								<td><code>DeliveryTax</code></td>
-								<td>#TODO</td>
+								<td>The total amount of tax charged to the customer for any delivery costs</td>
 							</tr>
 							<tr>
 								<td><code>GrandTotal</code></td>
-								<td>#TODO</td>
+								<td>The total amount the customer paid for the order including any delivery charges, taxes and discounts -this should be the total amount paid by the customer.</td>
 							</tr>
 							<tr>
 								<td><code>Currency</code></td>
 								<td>Expressed as <a href="http://en.wikipedia.org/wiki/ISO_4217">ISO 4217</a> currency codes</td>
 							</tr>
 							<tr>
+								<td><code>SalesChannel</code></td>
+								<td>Where the sale was made e.g. Online Store, or Retail Outlet. This can be anything you desire and will be used when graphing your sales. It is useful if you want to separate out one store from another.</td>
+							</tr>
+							<tr>
 								<td><code>Cashier</code></td>
-								<td>Name of cashier (if physical transaction)</td>
+								<td>A Cashier is a particular location within a SalesChannel. If a physical store this could be a Till, Floor or Department allowing you to compare different department's performance.</td>
 							</tr>
 							<tr>
 								<td><code>SalesAssistant</code></td>
-								<td>Name of sales assistant (if physical transaction)</td>
-							</tr>
-							<tr>
-								<td><code>SalesChannel</code></td>
-								<td>Type of sale e.g. Online Store, or Retail Outlet #TODO should indicate store location too e.g. liverpool???</td>
+								<td>SalesAssistant is another level of grouping within SalesChannel and allows you to compare performance. This could be the name of the assistant or another narrative of your chosing.</td>
 							</tr>
 							<tr>
 								<td><code>BillingAddress</code></td>
