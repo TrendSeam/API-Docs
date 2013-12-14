@@ -9,6 +9,16 @@ div[data-spy="affix"] {padding-top: 16px;}
 .docs-segment .col-md-6 + .col-md-6 {color:lightgrey;padding-bottom: 2em;font-family: monospace;}
 hr {margin-top: 0;}
 
+@media (max-width: 990px) {
+	.docs-segment {background-image: none;}
+	.nav-pills {display: none;}
+}
+
 .navbar-inverse {background-color: #000;}
 .navbar-brand {padding-left: 70px;position: relative;font-weight: bold;}
 .navbar-brand img {width:50px;height:50px;position: absolute;top:0;left:10px;}
+
+.nav-pills a {color: #000;}
+.nav-pills > li.active > a, 
+.nav-pills > li.active > a:hover, 
+.nav-pills > li.active > a:focus {background-color: #000;}
