@@ -84,7 +84,8 @@ title: TrendSeam API
 				
 				<h5>Connecting to the API</h5>
 				
-					<p>You can connect to the API using your TrendSeam <a href="#key">API Key</a>, submitted in each API call on the TrendSeam API Endpoint.</p>
+					<p>You can connect to the API using your <a href="#key-hash">hashed
+</a> TrendSeam <a href="#key">API Key</a>, submitted in each API call on the TrendSeam API Endpoint.</p>
 					
 					<p>The base API Endpoint URL is:</p>
 					
@@ -118,10 +119,6 @@ title: TrendSeam API
 								<td><code>application/json</code></td>
 							</tr>
 							<tr>
-								<td><code>Connection</code></td>
-								<td><code>keep-alive</code></td>
-							</tr>
-							<tr>
 								<td><code>Content-Type</code></td>
 								<td><code>application/json; charset=UTF-8</code></td>
 							</tr>
@@ -129,30 +126,18 @@ title: TrendSeam API
 								<td><code>Authorization</code></td>
 								<td><code>Basic <a href="#key-hash">[Your API Key Hash  - see note]</a></code></td>
 							</tr>
-							<tr>
-								<td><code>Accept-Encoding</code></td>
-								<td><code>gzip,deflate,sdch</code></td>
-							</tr>
-							<tr>
-								<td><code>Accept-Language</code></td>
-								<td><code>en-GB,en-US</code></td>
-							</tr>
-							<tr>
-								<td><code>Accept-Charset</code></td>
-								<td><code>ISO-8859-1,utf-8</code></td>
-							</tr>
 						</tbody>
 					</table>
 					
 				
 					
-				<h5 id="key-hash">API Key Hash</h5>
+				<h5 id="key-hash">Creating your Hashed API Key</h5>
 				
 					<p>Your TrendSeam API Key needs to be hashed before you add it into your Request Headers. Follow these steps to hash the key:</p>
 					<ol>
 						<li>Request a TrendSeam API key from us</li>
 						<li>Create a string by concatenating your API key, a colon and your API key again, as such  <code>YOURKEY:YOURKEY</code></li>
-						<li>Base64 encode the whole string</li>
+						<li>Base64 encode this newly created string (you can use this <a href="http://www.base64encode.org/" class="new-window">online tool</a>)</li>
 					</ol>
 					<p>Here is a worked example using the fictional API key:</p>
 					
@@ -180,14 +165,15 @@ title: TrendSeam API
 			
 <pre>
 <code>
+/* Use your own TrendSeam API Key Hash, not the 
+   one shown below!
+   Replace the string after "Basic" with your
+   own API Key Hash */
+
 $headers = [
- 'Accept: application/json, text/javascript, */*',
- 'Connection: keep-alive',
+ 'Accept: application/json',
  'Content-Type: application/json; charset=UTF-8',
- 'Authorization: Basic WXloc0g3RHNoMjMyYTc5MmRnUzpZeWhzSDdEc2gyMzJhNzkyZGdT',
- 'Accept-Encoding: gzip,deflate,sdch',
- 'Accept-Language: en-GB,en-US',
- 'Accept-Charset: ISO-8859-1,utf-8'
+ 'Authorization: Basic WXloc0g3RHNoMjMyYTc5MmRnUzpZeWhzSDdEc2gyMzJhNzkyZGdT'
 ];
 </code>
 </pre>
@@ -312,7 +298,7 @@ $headers = [
 							</tr>
 							<tr>
 								<td><code>OrderItems</code></td>
-								<td>The associated Array of <a href="#product">Products</a></td>
+								<td>The associated Array of <a href="#product">Products</a> in the Order</td>
 							</tr>
 						</tbody>
 					</table>
