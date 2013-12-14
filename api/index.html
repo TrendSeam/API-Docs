@@ -28,11 +28,12 @@ title: TrendSeam API
 					
 					<p>To get the most from TrendSeam, you should be regularly sending us three key streams of data. These are:</p>
 					<ul>
+						<li><a href="#customer">Customers</a> (which will reference <a href="#order">Orders</a>)</li>
 						<li><a href="#product">Products</a> (and their <a href="#variant">Variants</a>)</li>
-						<li><a href="#order">Orders</a> (and their <a href="#order-product">Order Product</a>)</li>
-						<li><a href="#customer">Customers</a> (which will reference Orders)</li>
+						<li><a href="#order">Orders</a> (and their <a href="#order-item">Order Items</a>)</li>
 					</ul>
-					<p>To use TrendSeam at the most basic level, you must at least provide <a href="#order">Order</a> data with the associated <a href="#customer">Customer</a> record.</p>
+					
+					<p>If you want to get up and running quickly, we can get by with just the <a href="#order">Order</a> information, but if you want to get the full benefit of TrendSeam, all three streams will be needed.</p>
 			
 				<h5>Data Format</h5>
 				
@@ -44,7 +45,7 @@ title: TrendSeam API
 			
 				<p>Our aim is to provide a level playing field, to which any retailer can submit their data, but if for whatever reason you can't immediately submit all your data in the exact format we need, this usually isn't a huge problem.</p>
 		
-				<p>For example, the way you process tax may make it hard to import it the way we ask, so you can omit that as long as you provide the other minimum level of key data (which are each indicated as 'required' in this documentation). With the most fundamental 'required' data sent, TrendSeam can make sense of the general dataset as a whole, but what you get oit of TrendSeam maybe a little limited until you can find a way to provide that additional data.</p>
+				<p>For example, the way you process tax may make it hard to import it the way we ask, so you can omit that as long as you provide the other minimum level of key data (which are each indicated as 'required' in this documentation). With the most fundamental 'required' data sent, TrendSeam can make sense of the general dataset as a whole, but what you get out of TrendSeam maybe a little limited until you can find a way to provide that additional data.</p>
 				
 				<h5 id="key">Your API Key</h5>
 				
